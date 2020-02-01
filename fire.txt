@@ -1,0 +1,77 @@
+*class Fire {
+    constructor() {
+        this.init();
+        this.checkAuth();
+    }
+
+    init = () => {
+        if (!firebase.apps.length) {
+            firebase.initializeApp({
+                apiKey: "AIzaSyDe0q4FaYh02HYDcnJ6faGh1sbyY7msCw8",
+                authDomain: "seatcheck-751eb.firebaseapp.com",
+                databaseURL: "https://seatcheck-751eb.firebaseio.com",
+                projectId: "seatcheck-751eb",
+                storageBucket: "seatcheck-751eb.appspot.com",
+                messagingSenderId: "336251915233",
+                appId: "1:336251915233:web:e8a8eb18b6fac0fcff60a0",
+                measurementId: "G-M5Q00CMJLC"
+
+            });
+        }
+    };
+    checkAuth = () => {
+        firebase.auth().onAuthStateChanged(user => {
+
+            if (!user) {
+                try {
+                    firebase.auth().signInAnonymously();
+                } catch ({ message }) {
+                    alert(message);
+                }
+            }
+        });
+    };
+
+    send = messages => {
+        messages.forEach(item => {
+            const message = {
+                text: item.text,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                user: item.user
+            }
+
+            this.db.push(message);
+        });
+    };
+
+    parse = message => {
+        const { user, text, timestamp } = message.val();
+        const { key: _id } = message;
+        const createdAt = new Date(timestamp);
+        return {
+            _id,
+            createdAt,
+            text,
+            user
+        };
+
+    };
+
+    get = callback => {
+        this.db.on('child_added', message => callback(this.parse(message)));
+    };
+
+    off() {
+        this.db.off()
+    }
+
+    get db() {
+        return firebase.database().ref("message");
+    }
+
+    get uid() {
+        return (firebase.auth().currentUser || {}).uid
+    }
+}
+
+export default new Fire();*/
