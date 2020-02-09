@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import firebase from '../firebase';
 
-console.log("in AuthenticationScreen.js")
 
 const AuthenticationScreen = props => {
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
+
+    //console.log("in AuthenticationScreen.js")
 
     const emailInputHandler = inputText => {
         setEnteredEmail(inputText);
@@ -22,6 +24,8 @@ const AuthenticationScreen = props => {
         try {
             firebase.auth().signInWithEmailAndPassword(enteredEmail, enteredPassword).then(function (user) {
                 //console.log("In AuthenticationScreen: ", user);
+                console.log("Logged in (AuthScreen 26)");
+                //navigation.navigate('Home')
             });
             //props.checkAuth;
         } catch(error){
