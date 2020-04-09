@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, TextInput, Image, StyleSheet, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 import firebase from '../firebase';
 
@@ -21,38 +20,49 @@ const AuthenticationScreen = props => {
 
     const loginInputHandler = () => {
         //console.log(enteredUsername);
-        try {
-            firebase.auth().signInWithEmailAndPassword(enteredEmail, enteredPassword).then(function (user) {
+
+
+        firebase.auth().signInWithEmailAndPassword(enteredEmail.toLowerCase(), enteredPassword)
+            .then(function (user) {
                 //console.log("In AuthenticationScreen: ", user);
                 console.log("Logged in (AuthScreen 26)");
                 //navigation.navigate('Home')
-            });
+            })
             //props.checkAuth;
-        } catch(error){
-            console.log(error.toString());
-            return;
-        }
+            .catch(function (error) {
+                alert(error.toString());
+                console.log(error.toString());
+                return;
+
+            })
     };
 
 
     const signupInputHandler = () => {
 
-        try {
-            firebase.auth().createUserWithEmailAndPassword(enteredEmail, enteredPassword).then(function (user) {
+
+        firebase.auth().createUserWithEmailAndPassword(enteredEmail.toLowerCase(), enteredPassword)
+            .then(function (user) {
                 //console.log("user.uid: ", user.user.uid);
                 firebase.firestore().collection('users').doc(user.user.uid).set({
                     uid: user.user.uid,
-                    email: enteredEmail,
-                    joinedMaps: [],
-                    createdMaps: []
+                    email: enteredEmail.toLowerCase(),
+                    allMyMaps: {},
+                    scannedLocation: {}
                 });
-            });
-            //props.checkAuth;
+            })
 
-        } catch (error) {
-            console.log(error.toString());
-        }
-        //
+
+            .catch(function (error) {
+                if (enteredEmail == '' || enteredPassword == '') {
+                    alert("Type in your email and create a password");
+                }
+                else {
+                    alert(error.toString());
+                }
+                console.log(error.toString());
+                return;
+            })
     };
 
 
@@ -67,29 +77,76 @@ const AuthenticationScreen = props => {
     };
 
     const testInputHandler = () => {
-       console.log("in test");
+        console.log("in test");
     };
 
+    /* <Button title="Logout" onPress={logoutInputHandler} />
+             <Button title="Test" onPress={testInputHandler} />
+              <Button title="Login" onPress={loginInputHandler} />*/
+
     return (
-        <View>
-            <Text>Email</Text>
-            <TextInput style={styles.input} onChangeText={emailInputHandler} value={enteredEmail} />
-            <Text>Password</Text>
-            <TextInput style={styles.input} onChangeText={passwordInputHandler} value={enteredPassword} />
-            <Button title="Login" onPress={loginInputHandler} />
-            <Button title="Sign Up" onPress={signupInputHandler} />
-            <Button title="Logout" onPress={logoutInputHandler} />
-            <Button title="Test" onPress={testInputHandler} />
-        </View>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <View style={styles.logoContainer}>
+            <Text style={styles.title}>Social Compass</Text>
+                <Image
+                    style={styles.logo}
+                    source={require('../images/logo.png')}
+                />
+            </View>
+            <View style={styles.formContainer}>
+                <TextInput placeholder="email" autocorrect={false} autoCapitalize='none' placeholderTextColor="rgba(255,255,255,0.7)" style={styles.input} onChangeText={emailInputHandler} value={enteredEmail} />
+                <TextInput placeholder="password" autocorrect={false} autoCapitalize='none' secureTextEntry={true} placeholderTextColor="rgba(255,255,255,0.7)" style={styles.input} onChangeText={passwordInputHandler} value={enteredPassword} />
+                <TouchableOpacity style={styles.buttonContainer} onPress={loginInputHandler}>
+                    <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonContainer} onPress={signupInputHandler}>
+                    <Text style={styles.buttonText}>Sign Up for Social Compass</Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#3498db",
+        padding: 20
+    },
+    logoContainer: {
+        alignItems: 'center',
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
+    logo: {
+        width: 100,
+        height: 100
+    },
+    title: {
+        color: '#FFF',
+        marginBottom: 30,
+        width: 190,
+        textAlign: 'center',
+        opacity: 0.9,
+        fontWeight: '700',
+        fontSize: 25
+    },
     input: {
-        height: 30,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 1,
-        marginVertical: 10
+        height: 40,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        marginBottom: 15,
+        color: '#FFF',
+        paddingHorizontal: 10
+    },
+    buttonContainer: {
+        backgroundColor: '#2980b9',
+        paddingVertical: 15,
+        marginBottom: 10
+    },
+    buttonText: {
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontWeight: '700'
     }
 });
 
