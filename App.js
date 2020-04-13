@@ -68,8 +68,10 @@ export default function App() {
     <Drawer.Navigator initialRouteName="Home" drawerContent={props => CustomDrawer(props)}>
       <Drawer.Screen name="Home" component={StackNavigation} />
       <Drawer.Screen name="Join Map" component={JoinMapStackNavigation} />
+      {/*
       <Drawer.Screen name="Add Contact" component={AddContactStackNavigation} />
-      <Drawer.Screen name="Build Map" component={BuildMapStackNavigation} />
+     <Drawer.Screen name="Build Map" component={BuildMapStackNavigation} />
+      */}
     </Drawer.Navigator>
   )
 //stackNav={props.navigat} />}
@@ -81,14 +83,16 @@ export default function App() {
       <Tab.Screen name="Scan" >
         {props => <ScannerScreen {...props} currUser={currUser} />}
       </Tab.Screen>
+      {/* Commenting out feature
       <Tab.Screen name="Contacts">
         {props => <ContactsScreen {...props} currUser={currUser} />}
       </Tab.Screen>
+      */}
     </Tab.Navigator>
   )
-
   const AddContactStackNavigation = ({ navigation }) => (
     <SettingsStack.Navigator>
+      {/*
       <SettingsStack.Screen name="Setting" options={{
         headerTitle: "Add Contact",
         headerLeft: () => (
@@ -99,8 +103,10 @@ export default function App() {
       }} >
         {props => <AddContactScreen {...props} currUser={currUser} />}
       </SettingsStack.Screen>
+    */}
     </SettingsStack.Navigator>
   )
+ 
 
   const JoinMapStackNavigation = ({ navigation }) => (
     <SettingsStack.Navigator>
@@ -119,6 +125,7 @@ export default function App() {
 
   const BuildMapStackNavigation = ({ navigation }) => (
     <SettingsStack.Navigator>
+{/*
       <SettingsStack.Screen name="Setting" options={{
         headerTitle: "Build Map",
         headerLeft: () => (
@@ -129,9 +136,9 @@ export default function App() {
       }} >
         {props => <BuildMapScreen {...props} currUser={currUser} />}
       </SettingsStack.Screen>
+    */}
     </SettingsStack.Navigator>
   )
-
   const StackNavigation = ({ navigation }) => (
     <Stack.Navigator>
       <Stack.Screen name="Social Compass" component={HomeTabNavigator} options={{
