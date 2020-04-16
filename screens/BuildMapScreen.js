@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "#3498db",
+        backgroundColor: "#fafafa",
         padding: 20
 
     },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     },
     createButton: {
         flex: 1,
-        backgroundColor: '#2980b9',
+        backgroundColor: '#3f51b5',
         padding: 5,
         marginBottom: 40,
         alignItems: 'center',
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     },
     editButton: {
         flex: 1,
-        backgroundColor: '#2980b9',
+        backgroundColor: '#3f51b5',
         padding: 5,
         alignItems: 'center',
         justifyContent: 'center'
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     buildButton: {
-        backgroundColor: '#2980b9',
+        backgroundColor: '#3f51b5',
         padding: 5,
         marginHorizontal: 5,
         alignItems: 'center',

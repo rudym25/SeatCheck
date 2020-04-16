@@ -7,6 +7,7 @@ import firebase from '../firebase';
 const AuthenticationScreen = props => {
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
+    
 
     //console.log("in AuthenticationScreen.js")
 
@@ -66,7 +67,6 @@ const AuthenticationScreen = props => {
     };
 
 
-
     const logoutInputHandler = () => {
         firebase.auth().signOut().then(function () {
             // sign out successful
@@ -90,12 +90,12 @@ const AuthenticationScreen = props => {
             <Text style={styles.title}>Social Compass</Text>
                 <Image
                     style={styles.logo}
-                    source={require('../images/logo.png')}
+                    source={require('../images/stock.jpg')}
                 />
             </View>
             <View style={styles.formContainer}>
-                <TextInput placeholder="email" autocorrect={false} autoCapitalize='none' placeholderTextColor="rgba(255,255,255,0.7)" style={styles.input} onChangeText={emailInputHandler} value={enteredEmail} />
-                <TextInput placeholder="password" autocorrect={false} autoCapitalize='none' secureTextEntry={true} placeholderTextColor="rgba(255,255,255,0.7)" style={styles.input} onChangeText={passwordInputHandler} value={enteredPassword} />
+                <TextInput placeholder="email" autocorrect={false} autoCapitalize='none' placeholderTextColor="#000000" style={styles.input} onChangeText={emailInputHandler} value={enteredEmail} />
+                <TextInput placeholder="password" autocorrect={false} autoCapitalize='none' secureTextEntry={true} placeholderTextColor="#000000" style={styles.input} onChangeText={passwordInputHandler} value={enteredPassword} />
                 <TouchableOpacity style={styles.buttonContainer} onPress={loginInputHandler}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
@@ -110,7 +110,7 @@ const AuthenticationScreen = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#3498db",
+        backgroundColor: "#fafafa",
         padding: 20
     },
     logoContainer: {
@@ -133,10 +133,12 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: '#ffffff',
         marginBottom: 15,
-        color: '#FFF',
-        paddingHorizontal: 10
+        color: '#000000',
+        paddingHorizontal: 10,
+        borderColor: 'gray'
+        
     },
     buttonContainer: {
         backgroundColor: '#2980b9',

@@ -145,7 +145,6 @@ const EditMapScreen = props => {
                     </View>
                 </View>
             </Modal>
-
         </View>
     );
 

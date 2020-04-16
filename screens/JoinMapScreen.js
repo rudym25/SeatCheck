@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, Text, StyleSheet } from 'react-native';
+import { View, Button, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import firebase from '../firebase';
 
@@ -102,11 +102,15 @@ const JoinMapScreen = props => {
 
 
     return (
-        <View>
-            <Text>Join Map</Text>
-            <TextInput style={styles.input} onChangeText={inputText => { setEnteredMapCode(inputText) }} value={enteredMapCode} />
-            <Button title="Join Map" onPress={joinMapInputHandler} />
-        </View>)
+
+        <View style={styles.buttonContainers}>
+                    <TextInput style={styles.input} onChangeText={inputText => { setEnteredMapCode(inputText) }} value={enteredMapCode} />
+                    <TouchableOpacity style={styles.buildButton} title="Join Map" onPress={joinMapInputHandler}>
+                        <Text style={styles.buttonText}>Join Map</Text>
+                    </TouchableOpacity>
+        </View>
+
+)
 };
 
 const styles = StyleSheet.create({
@@ -115,7 +119,52 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
         marginVertical: 10
+    },
+    container: {
+        flex: 1,
+        backgroundColor: "#fafafa",
+        padding: 20
+
+    },
+    introContainer: {
+        flex: 1,
+        margin: 40
+    },
+    createButton: {
+        flex: 1,
+        backgroundColor: '#3f51b5',
+        padding: 5,
+        marginBottom: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    editButton: {
+        flex: 1,
+        backgroundColor: '#3f51b5',
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonText: {
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontWeight: '700',
+        fontSize: 20
+    },
+    input: {
+        height: 40,
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        marginBottom: 15,
+        color: '#000',
+        paddingHorizontal: 10
+    },
+    buildButton: {
+        backgroundColor: '#3f51b5',
+        padding: 5,
+        marginHorizontal: 5,
+        alignItems: 'center',
     }
+
 });
 
 export default JoinMapScreen;
