@@ -168,8 +168,7 @@ const MakeFormScreen = props => {
             <View style={{ alignItems: 'center' }}>
                 <Text style={[styles.text, { fontSize: 30, marginTop: 10, marginBottom: 15 }]}>Form</Text>
             </View>
-            
-{/*
+
             <CheckBox
                 center
                 title='Ask Members for a Username'
@@ -196,7 +195,6 @@ const MakeFormScreen = props => {
                 uncheckedColor='white'
                 containerStyle={{ backgroundColor: "#3498db", borderColor: '#3498db', margin: 0 }}
             />
-        */}
             <Button title="back" onPress={() => props.goBack()} />
             <View style={{ alignItems: 'center' }}>
                 <Text style={[styles.text, { fontSize: 30, marginTop: 35, marginBottom: 25 }]}>Form Questions</Text>
